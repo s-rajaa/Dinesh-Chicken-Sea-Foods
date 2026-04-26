@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Dinesh Chicken & Sea Foods | Fresh Wholesale</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f172a;
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 1.8rem;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid rgba(34, 197, 94, 0.3);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .brand h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #22c55e 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tagline i {
+            color: #22c55e;
+            font-size: 0.8rem;
+        }
+
+        .contact-badge {
+            background: rgba(34, 197, 94, 0.12);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+        }
+
+        .contact-badge i {
+            color: #25D366;
+            margin-right: 6px;
+        }
+
+        /* Product Grid - Responsive with fixed aspect ratio */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.5s ease-out 0.1s backwards;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: #1e293b;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease;
+            box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 32px -16px rgba(0, 0, 0, 0.5);
+            border-color: rgba(34, 197, 94, 0.6);
+        }
+
+        /* Image container - FIXED ASPECT RATIO 4:3 for consistent sizing across all devices */
+        .product-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.06);
+        }
+
+        /* Fallback styling */
+        .img-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            gap: 12px;
+        }
+
+        .img-fallback span:first-child {
+            font-size: 3rem;
+        }
+
+        .img-fallback span:last-child {
+            font-size: 0.85rem;
+            color: #22c55e;
+            font-weight: 500;
+            background: rgba(34, 197, 94, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .card-content {
+            padding: 1.2rem 1.2rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.2px;
+            color: #f1f5f9;
+        }
+
+        .price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #22c55e;
+            margin: 0.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #94a3b8;
+        }
+
+        .buy-btn {
+            background: #25D366;
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.85rem 0;
+            border-radius: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            margin-top: auto;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.2);
+        }
+
+        .buy-btn i {
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #1da15a;
+            transform: scale(0.98);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(34, 197, 94, 0.25);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fadeInUp 0.5s ease-out 0.2s backwards;
+        }
+
+        .footer .contact-footer {
+            background: rgba(37, 211, 102, 0.12);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer .contact-footer i {
+            color: #25D366;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            color: #22c55e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments - maintaining aspect ratio */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 1.2rem;
+            }
+            .header {
+                flex-direction: column;
+                gap: 0.7rem;
+                align-items: flex-start;
+            }
+            .brand h1 {
+                font-size: 1.6rem;
+            }
+            .products-grid {
+                gap: 1.2rem;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            .product-name {
+                font-size: 1.2rem;
+            }
+            .price {
+                font-size: 1.4rem;
+            }
+            /* Image container keeps same aspect ratio on mobile */
+            .product-img {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .product-img {
+                aspect-ratio: 4 / 3;
+            }
+            .card-content {
+                padding: 1rem 1rem 1.2rem;
+            }
+        }
+
+        /* Card appear animation */
+        .product-card {
+            opacity: 0;
+            animation: cardAppear 0.4s ease forwards;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <div class="brand">
+            <h1>Dinesh Chicken & Sea Foods</h1>
+            <div class="tagline">
+                <i class="fas fa-check-circle"></i> Fresh Chicken & Fish Wholesale
+                <i class="fas fa-fish" style="margin-left: 6px;"></i>
+            </div>
+        </div>
+        <div class="contact-badge">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp: +91 8015187518
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products-grid" id="productGrid"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="contact-footer">
+            <i class="fas fa-phone-alt"></i> Call / WhatsApp: 
+            <a href="tel:+918015187518">8015187518</a>
+        </div>
+        <p style="font-size: 0.8rem;">Fresh daily catch | Hygienic packing | Wholesale rates</p>
+        <p>© 2025 Dinesh Chicken & Sea Foods — Quality you can taste</p>
+    </div>
+</div>
+
+<script>
+    // Product Data with local image paths - FIXED DIMENSIONS
+    // Images will maintain consistent 4:3 aspect ratio on all devices
+    const products = [
+        { name: "Broiler Chicken", price: 199, imgSrc: "img1.jpg" },
+        { name: "Country Chicken", price: 349, imgSrc: "img2.jpg" },
+        { name: "Turkey", price: 699, imgSrc: "img3.jpg" },
+        { name: "Quail", price: 79, imgSrc: "img4.jpg" },
+        { name: "Duck", price: 239, imgSrc: "img5.jpg" },
+        { name: "Vanjiram Fish", price: 599, imgSrc: "img6.jpg" },
+        { name: "Rohu Fish", price: 179, imgSrc: "img7.jpg" },
+        { name: "Katla Fish", price: 179, imgSrc: "img8.jpg" },
+        { name: "Kendai Fish", price: 149, imgSrc: "img9.jpg" }
+    ];
+
+    // WhatsApp Configuration
+    const WHATSAPP_NUMBER = "918015187518";
+    
+    // Function to open WhatsApp with pre-filled message
+    function sendWhatsAppOrder(productName, price) {
+        const message = `Hello, I want to order ${productName} - ₹${price}`;
+        const encodedMsg = encodeURIComponent(message);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+        window.open(url, '_blank');
+    }
+
+    // Render product cards with properly sized images
+    function renderProducts() {
+        const grid = document.getElementById('productGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        products.forEach((product, index) => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.style.animationDelay = `${index * 0.05}s`;
+            
+            // Image container with FIXED aspect ratio
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'product-img';
+            
+            // Create img element with proper sizing
+            const img = document.createElement('img');
+            img.src = product.imgSrc;
+            img.alt = product.name;
+            img.loading = "lazy";
+            
+            // Ensure proper image display with fixed dimensions
+            img.style.width = "100%";
+            img.style.height = "100%";
+            img.style.objectFit = "cover";
+            img.style.objectPosition = "center";
+            img.style.display = "block";
+            
+            // Handle missing images with fallback
+            img.onerror = function() {
+                this.style.display = "none";
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.className = 'img-fallback';
+                
+                const iconSpan = document.createElement('span');
+                const isFish = product.name.includes('Fish');
+                iconSpan.textContent = isFish ? '🐟' : '🍗';
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.textContent = product.name;
+                
+                fallbackDiv.appendChild(iconSpan);
+                fallbackDiv.appendChild(nameSpan);
+                imgContainer.appendChild(fallbackDiv);
+            };
+            
+            imgContainer.appendChild(img);
+            
+            // Card content
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+            
+            const nameElem = document.createElement('h3');
+            nameElem.className = 'product-name';
+            nameElem.textContent = product.name;
+            
+            const priceElem = document.createElement('div');
+            priceElem.className = 'price';
+            priceElem.innerHTML = `₹${product.price} <span>per kg / whole</span>`;
+            
+            const buyBtn = document.createElement('button');
+            buyBtn.className = 'buy-btn';
+            buyBtn.innerHTML = `<i class="fab fa-whatsapp"></i> Buy Now`;
+            buyBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                sendWhatsAppOrder(product.name, product.price);
+            });
+            
+            cardContent.appendChild(nameElem);
+            cardContent.appendChild(priceElem);
+            cardContent.appendChild(buyBtn);
+            
+            card.appendChild(imgContainer);
+            card.appendChild(cardContent);
+            grid.appendChild(card);
+        });
+    }
+
+    // Initialize on DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProducts();
+        
+        // Update footer year dynamically
+        const footerPara = document.querySelector('.footer p:last-child');
+        if (footerPara) {
+            const currentYear = new Date().getFullYear();
+            footerPara.innerHTML = `© ${currentYear} Dinesh Chicken & Sea Foods — Quality you can taste`;
+        }
+        
+        console.log("✅ Images use fixed aspect ratio 4:3 for consistent sizing on all devices");
+        console.log("📱 Fully responsive - images will scale properly on mobile, tablet, and desktop");
+    });
+</script>
+</body>
+</html>
